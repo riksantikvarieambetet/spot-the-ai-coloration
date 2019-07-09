@@ -1,0 +1,162 @@
+body {
+  font-size: 1rem;
+  font-weight: normal;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #3a3a3a;
+  letter-spacing: normal;
+  background: #FBFBFB;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+  margin-top: 1em;
+  margin-bottom: .7em;
+}
+
+p {
+  margin-top: 0;
+}
+
+a {
+  display: inline-block;
+  color: #c94a18;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all .4s;
+  line-height: 1.5;
+  text-decoration-color: transparent;
+}
+
+a:active {
+  color: #a33b14;
+  border-color: #a33b14;
+}
+
+a:hover {
+  color: #b54216;
+  text-decoration-color: #b54216;
+}
+
+button,
+input,
+select {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  background: #fff;
+}
+
+.raa-button {
+  display: block;
+  cursor: pointer;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 2px;
+  font-family: 'Source Sans Pro',sans-serif;
+  transition: background-color,border-color .4s;
+  box-sizing: border-box;
+  min-width: 6.25rem;
+  letter-spacing: .2px;
+  border: none;
+}
+
+.raa-button-confirm {
+  background-color: #008578;
+  border-color: #008578;
+}
+
+.raa-button-confirm:hover,
+.raa-button-confirm:active,
+.raa-button-confirm:focus {
+  background-color: #00786c;
+  border-color: #00786c;
+}
+
+.raa-nav {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: #fff;
+}
+
+.raa-nav ul {
+  padding: 0;
+  float: right;
+  margin: 0;
+}
+
+.raa-nav li {
+  list-style: none;
+  display: block;
+  float: right;
+  line-height: 50px;
+  text-transform: uppercase;
+}
+
+.raa-nav a {
+  text-decoration: none;
+  color: #6a6a6a;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-bottom: 4px;
+}
+
+.raa-nav a:hover,
+.raa-nav a:focus,
+.raa-nav a:active,
+.raa-nav a.current {
+  border-bottom: 2px solid #b54216;
+}
+
+.raa-nav img {
+  height: 50px;
+}
+
+/** APP SPECIFIC STARTS HERE **/
+
+.container {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 1rem;
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+section {
+  width: 100%;
+  height: calc(100vh - 104px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  width: 70%;
+  margin: auto;
+  margin-top: 1rem !important;
+  margin-bottom: 0;
+}
+
+section img {
+  max-width: 100%;
+  max-height: 360px;
+  margin: 0 auto;
+  display: block;
+}
