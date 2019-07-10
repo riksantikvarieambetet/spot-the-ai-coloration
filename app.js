@@ -6,24 +6,25 @@ const images = [
     "AI": false,
   },
   {
-    "img": "https://mm.dimu.org/image/012uMX4HNm2f?dimension=1200x1200",
+    "img": "http://mm.dimu.org/image/032s8YzUvfzU?dimension=1200x1200",
     "creditLine": "Blabla bla inte av Albin",
     "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
     "AI": true,
   },
   {
-    "img": "https://mm.dimu.org/image/012uMX4HNm2f?dimension=1200x1200",
+    "img": "https://mm.dimu.org/image/032sB3BDHVht?dimension=1200x1200",
     "creditLine": "Blabla bla inte av Albin",
     "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
     "AI": false,
   },
   {
-    "img": "https://mm.dimu.org/image/012uMX4HNm2f?dimension=1200x1200",
+    "img": "http://museum.helsingborg.se/web/image/zoom/349959/758_2004_LK_184.jpg",
     "creditLine": "Blabla bla inte av Albin",
     "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
     "AI": true,
   },
 ];
+const imagesNewOrder = shuffleArray(images);
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -36,7 +37,6 @@ function shuffleArray(array) {
 
 function populateQuestions() {
   const sectionContainer = document.querySelector('#sectionContainer');
-  const imagesNewOrder = shuffleArray(images);
 
   imagesNewOrder.forEach((question, i) => {
     const section = document.createElement('section');
@@ -75,20 +75,29 @@ document.querySelector('.start div button').addEventListener('click', () => {
   document.querySelector('#section-0').style.display = 'flex';
 });
 
+let existingAnswers = [];
 [...document.querySelectorAll('#sectionContainer button')].forEach(elm => {
   elm.addEventListener('click', e => {
-    if (e.target.dataset.answer) {
-      console.log(true);
-    } else {
-      console.log(false);
-    }
-
     const section = e.target.parentNode;
     section.style.display = 'none';
+  
+    const sectionId = section.id.substring(8);
+    let imageAnswerHolder = {};
+    imageAnswerHolder.img = imagesNewOrder[sectionId];
+
+    if (e.target.dataset.answer) {
+      imageAnswerHolder.correct = true;
+    } else {
+      imageAnswerHolder.correct = false;
+    }
+
+    existingAnswers.push(imageAnswerHolder);
+
     if (section.nextSibling) {
       section.nextSibling.style.display = 'flex';
     } else {
       // render results
+      console.log(existingAnswers);
     }
   });
 });
