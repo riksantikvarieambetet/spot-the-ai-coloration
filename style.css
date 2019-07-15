@@ -140,11 +140,15 @@ select {
 
 section {
   width: 100%;
-  height: calc(100vh - 104px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#sectionContainer section,
+.start {
+  height: calc(100vh - 104px);
 }
 
 button {

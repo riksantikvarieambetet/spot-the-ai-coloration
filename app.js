@@ -1,26 +1,34 @@
 const images = [
   {
     "img": "https://mm.dimu.org/image/012uMX4HNm2f?dimension=1200x1200",
-    "creditLine": "Blabla bla inte av Albin",
-    "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "creditLine": "Fanny Oldenburg åt Nordiskamuseet 2004.",
+    "url": "#",
+    "license": "CC-BY-NC-ND",
+    "licenseURL": "http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en",
     "AI": false,
   },
   {
     "img": "http://mm.dimu.org/image/032s8YzUvfzU?dimension=1200x1200",
-    "creditLine": "Blabla bla inte av Albin",
-    "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "creditLine": "Gustaf Wernersson Cronquist 1928.",
+    "url": "#",
+    "license": "Public Domian",
+    "licenseURL": "http://creativecommons.org/publicdomain/mark/1.0/deed.en",
     "AI": true,
   },
   {
-    "img": "https://mm.dimu.org/image/032sB3BDHVht?dimension=1200x1200",
-    "creditLine": "Blabla bla inte av Albin",
-    "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "img": "http://collections.smvk.se/carlotta-em/web/image/zoom/2725736/0249.i.0174.jpg",
+    "creditLine": "Didrik Bilt 1902.",
+    "url": "#",
+    "license": "Public Domian",
+    "licenseURL": "http://creativecommons.org/publicdomain/mark/1.0/",
     "AI": false,
   },
   {
-    "img": "http://museum.helsingborg.se/web/image/zoom/349959/758_2004_LK_184.jpg",
-    "creditLine": "Blabla bla inte av Albin",
-    "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "img": "http://collections.smvk.se/carlotta-em/web/image/zoom/3758281/0937.0191.jpg",
+    "creditLine": "John Törnqvist tidigt 1900-tal.",
+    "url": "#",
+    "license": "Public Domian",
+    "licenseURL": "http://creativecommons.org/publicdomain/mark/1.0/",
     "AI": true,
   },
 ];
@@ -65,6 +73,50 @@ function populateQuestions() {
     section.appendChild(btnAI);
 
     sectionContainer.appendChild(section);
+  });
+}
+
+function renderImagesResult() {
+  const imagesResultContainer = document.querySelector('#imagesResult');
+
+  existingAnswers.forEach(a => {
+    const container = document.createElement('div');
+
+    const img = document.createElement('img');
+    img.src = a.img.img;
+
+    const imgA = document.createElement('a');
+    const imgATextNode = document.createTextNode(a.img.creditLine);
+    imgA.href = a.url;
+    imgA.appendChild(imgATextNode);
+
+    const licenseA = document.createElement('a');
+    const licenseATextNode = document.createTextNode(a.img.license);
+    licenseA.href = a.img.licenseURL;
+    licenseA.appendChild(licenseATextNode);
+
+    let pText = '';
+    if (a.img.AI) {
+      pText = 'Denna bild är kolorerad med AI. ';
+    } else {
+      pText = 'Denna bild är inte kolorerad med AI. ';
+    }
+
+    if (a.correct) {
+      pText += 'Du svarade rätt.';
+    } else {
+      pText += 'Du svarade fel.';
+    }
+
+    const p = document.createElement('p');
+    const pTextNode = document.createTextNode(pText);
+    p.appendChild(pTextNode);
+
+    container.appendChild(img);
+    container.appendChild(imgA);
+    container.appendChild(licenseA);
+    container.appendChild(p);
+    imagesResultContainer.appendChild(container);
   });
 }
 
@@ -115,10 +167,12 @@ let existingAnswers = [];
           'Fel',
         ]
       };
-      const doughnut = new Chart('doughnut', {
+      new Chart('doughnut', {
         type: 'doughnut',
         data: data,
       });
+
+      renderImagesResult();
     }
   });
 });
