@@ -28,8 +28,8 @@ const imagesNewOrder = shuffleArray(images);
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 
   return array;
@@ -59,7 +59,7 @@ function populateQuestions() {
     } else {
       btnO.dataset.answer = true;
     }
-    
+
     section.appendChild(img);
     section.appendChild(btnO);
     section.appendChild(btnAI);
@@ -80,7 +80,7 @@ let existingAnswers = [];
   elm.addEventListener('click', e => {
     const section = e.target.parentNode;
     section.style.display = 'none';
-  
+
     const sectionId = section.id.substring(8);
     let imageAnswerHolder = {};
     imageAnswerHolder.img = imagesNewOrder[sectionId];
@@ -98,6 +98,27 @@ let existingAnswers = [];
     } else {
       // render results
       console.log(existingAnswers);
+
+      const correctAnswersCount = existingAnswers.filter(a => a.correct).length;
+      const incorrectAnswersCount = existingAnswers.length - correctAnswersCount;
+
+      document.querySelector('#pCorrect').innerText = ((correctAnswersCount / existingAnswers.length) * 100).toFixed(0);
+
+      document.querySelector('.final').style.display = 'flex';
+      const data = {
+        datasets: [{
+          data: [correctAnswersCount, incorrectAnswersCount],
+          backgroundColor: ['#c94a18'],
+        }],
+        labels: [
+          'Rätt',
+          'Fel',
+        ]
+      };
+      const doughnut = new Chart('doughnut', {
+        type: 'doughnut',
+        data: data,
+      });
     }
   });
 });

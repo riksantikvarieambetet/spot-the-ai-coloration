@@ -31,11 +31,15 @@
     </section>
     <div id="sectionContainer"></div>
     <section class="final" style="display: none;">
-      <h1>Du fick x% rätt.</h1>
+      <h1>Du fick <span id="pCorrect"></span>% rätt.</h1>
+      <div class="chart-container" style="position: relative; max-width: 70%;">
+        <canvas id="doughnut" width="400" height="400"></canvas>
+      </div>
 
       <p>licens på bilderna mm</p>
     </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
