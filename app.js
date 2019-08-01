@@ -139,8 +139,6 @@ let existingAnswers = [];
       section.nextSibling.style.display = 'flex';
     } else {
       // render results
-      console.log(existingAnswers);
-
       const correctAnswersCount = existingAnswers.filter(a => a.correct).length;
       const incorrectAnswersCount = existingAnswers.length - correctAnswersCount;
 
