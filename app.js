@@ -69,30 +69,30 @@ function populateQuestions() {
 function renderImagesResult() {
   const imagesResultContainer = document.querySelector('#imagesResult');
 
-  existingAnswers.forEach(a => {
+  images.forEach((img, i) => {
     const container = document.createElement('div');
 
-    const img = document.createElement('img');
-    img.src = a.img.img;
+    const imgElm = document.createElement('img');
+    imgElm.src = img.img;
 
     const imgA = document.createElement('a');
-    const imgATextNode = document.createTextNode(a.img.creditLine);
-    imgA.href = a.url;
+    const imgATextNode = document.createTextNode(img.creditLine);
+    imgA.href = img.url;
     imgA.appendChild(imgATextNode);
 
     const licenseA = document.createElement('a');
-    const licenseATextNode = document.createTextNode(a.img.license);
-    licenseA.href = a.img.licenseURL;
+    const licenseATextNode = document.createTextNode(img.license);
+    licenseA.href = img.licenseURL;
     licenseA.appendChild(licenseATextNode);
 
     let pText = '';
-    if (a.img.AI) {
+    if (img.AI) {
       pText = 'Denna bild är kolorerad med AI. ';
     } else {
       pText = 'Denna bild är inte kolorerad med AI. ';
     }
 
-    if (a.correct) {
+    if (existingAnswers[i]) {
       pText += 'Du svarade rätt.';
     } else {
       pText += 'Du svarade fel.';
@@ -102,7 +102,7 @@ function renderImagesResult() {
     const pTextNode = document.createTextNode(pText);
     p.appendChild(pTextNode);
 
-    container.appendChild(img);
+    container.appendChild(imgElm);
     container.appendChild(imgA);
     container.appendChild(licenseA);
     container.appendChild(p);
@@ -123,23 +123,17 @@ let existingAnswers = [];
     const section = e.target.parentNode;
     section.style.display = 'none';
 
-    const sectionId = section.id.substring(8);
-    let imageAnswerHolder = {};
-    imageAnswerHolder.img = images[sectionId];
-
     if (e.target.dataset.answer) {
-      imageAnswerHolder.correct = true;
+      existingAnswers.push(1);
     } else {
-      imageAnswerHolder.correct = false;
+      existingAnswers.push(0);
     }
-
-    existingAnswers.push(imageAnswerHolder);
 
     if (section.nextSibling) {
       section.nextSibling.style.display = 'flex';
     } else {
       // render results
-      const correctAnswersCount = existingAnswers.filter(a => a.correct).length;
+      const correctAnswersCount = existingAnswers.filter(a => a).length;
       const incorrectAnswersCount = images.length - correctAnswersCount;
 
       document.querySelector('#pCorrect').innerText = ((correctAnswersCount / images.length) * 100).toFixed(0);
