@@ -142,7 +142,6 @@ let existingAnswers = [];
 // check if this is shared results url
 if (window.location.search && window.location.search.includes('?r=')) {
   existingAnswers = [...window.location.search.replace('?r=', '')];
-  console.log(existingAnswers)
   renderResults();
   document.querySelector('.start').style.display = 'none';
 } else {
