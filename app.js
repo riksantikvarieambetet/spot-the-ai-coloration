@@ -32,21 +32,11 @@ const images = [
     "AI": true,
   },
 ];
-const imagesNewOrder = shuffleArray(images);
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-
-  return array;
-}
 
 function populateQuestions() {
   const sectionContainer = document.querySelector('#sectionContainer');
 
-  imagesNewOrder.forEach((question, i) => {
+  images.forEach((question, i) => {
     const section = document.createElement('section');
     const img = document.createElement('img');
     const btnO = document.createElement('button');
@@ -135,7 +125,7 @@ let existingAnswers = [];
 
     const sectionId = section.id.substring(8);
     let imageAnswerHolder = {};
-    imageAnswerHolder.img = imagesNewOrder[sectionId];
+    imageAnswerHolder.img = images[sectionId];
 
     if (e.target.dataset.answer) {
       imageAnswerHolder.correct = true;
