@@ -66,6 +66,34 @@ function populateQuestions() {
   });
 }
 
+function renderResults() {
+  // render results
+  const correctAnswersCount = existingAnswers.filter(a => a).length;
+  const incorrectAnswersCount = images.length - correctAnswersCount;
+
+  document.querySelector('#pCorrect').innerText = ((correctAnswersCount / images.length) * 100).toFixed(0);
+
+  document.querySelector('.final').style.display = 'flex';
+  const data = {
+    datasets: [{
+      data: [correctAnswersCount, incorrectAnswersCount],
+      backgroundColor: ['#c94a18'],
+    }],
+    labels: [
+      'Rätt',
+      'Fel',
+    ]
+  };
+  new Chart('doughnut', {
+    type: 'doughnut',
+    data: data,
+  });
+
+  const shareableURL = window.location.href + '?r=' + existingAnswers.toString().replace(/,/g, '');
+
+  renderImagesResult();
+}
+
 function renderImagesResult() {
   const imagesResultContainer = document.querySelector('#imagesResult');
 
@@ -93,9 +121,9 @@ function renderImagesResult() {
     }
 
     if (existingAnswers[i]) {
-      pText += 'Du svarade rätt.';
+      pText += 'Rätt.';
     } else {
-      pText += 'Du svarade fel.';
+      pText += 'Fel.';
     }
 
     const p = document.createElement('p');
@@ -110,14 +138,22 @@ function renderImagesResult() {
   });
 }
 
-populateQuestions();
+let existingAnswers = [];
+// check if this is shared results url
+if (window.location.search && window.location.search.includes('?r=')) {
+  existingAnswers = [...window.location.search.replace('?r=', '')];
+  console.log(existingAnswers)
+  renderResults();
+  document.querySelector('.start').style.display = 'none';
+} else {
+  populateQuestions();
+}
 
 document.querySelector('.start div button').addEventListener('click', () => {
   document.querySelector('.start').style.display = 'none';
   document.querySelector('#section-0').style.display = 'flex';
 });
 
-let existingAnswers = [];
 [...document.querySelectorAll('#sectionContainer button')].forEach(elm => {
   elm.addEventListener('click', e => {
     const section = e.target.parentNode;
@@ -132,29 +168,7 @@ let existingAnswers = [];
     if (section.nextSibling) {
       section.nextSibling.style.display = 'flex';
     } else {
-      // render results
-      const correctAnswersCount = existingAnswers.filter(a => a).length;
-      const incorrectAnswersCount = images.length - correctAnswersCount;
-
-      document.querySelector('#pCorrect').innerText = ((correctAnswersCount / images.length) * 100).toFixed(0);
-
-      document.querySelector('.final').style.display = 'flex';
-      const data = {
-        datasets: [{
-          data: [correctAnswersCount, incorrectAnswersCount],
-          backgroundColor: ['#c94a18'],
-        }],
-        labels: [
-          'Rätt',
-          'Fel',
-        ]
-      };
-      new Chart('doughnut', {
-        type: 'doughnut',
-        data: data,
-      });
-
-      renderImagesResult();
+      renderResults();
     }
   });
 });
