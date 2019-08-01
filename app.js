@@ -140,9 +140,9 @@ let existingAnswers = [];
     } else {
       // render results
       const correctAnswersCount = existingAnswers.filter(a => a.correct).length;
-      const incorrectAnswersCount = existingAnswers.length - correctAnswersCount;
+      const incorrectAnswersCount = images.length - correctAnswersCount;
 
-      document.querySelector('#pCorrect').innerText = ((correctAnswersCount / existingAnswers.length) * 100).toFixed(0);
+      document.querySelector('#pCorrect').innerText = ((correctAnswersCount / images.length) * 100).toFixed(0);
 
       document.querySelector('.final').style.display = 'flex';
       const data = {
