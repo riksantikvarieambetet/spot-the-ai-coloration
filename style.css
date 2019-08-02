@@ -164,3 +164,56 @@ section img {
   margin: 0 auto;
   display: block;
 }
+
+.raa-input {
+  display: block;
+  width: 100%;
+  padding: .75rem;
+  height: 2.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #dadada;
+  border-radius: 2px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.raa-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  z-index: 5000;
+  background-color: rgba(0,0,0,.5);
+  display: none;
+}
+
+.raa-modal-overlay:target {
+  display: flex;
+}
+
+.raa-modal {
+  z-index: 99997;
+  max-width: 900px;
+  position: relative;
+  flex: 1;
+  border-radius: 2px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.raa-modal .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.raa-modal {
+  padding: 2rem;
+  padding-top: 0;
+}

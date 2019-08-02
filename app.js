@@ -90,6 +90,7 @@ function renderResults() {
   });
 
   const shareableURL = window.location.href + '?r=' + existingAnswers.toString().replace(/,/g, '');
+  document.querySelector('#shareURLInput').value = shareableURL;
 
   renderImagesResult();
 }
@@ -138,6 +139,14 @@ function renderImagesResult() {
   });
 }
 
+function copySharableUrl() {
+  const copyTextarea = document.querySelector('#shareURLInput');
+  copyTextarea.focus();
+  copyTextarea.select();
+  document.execCommand('copy'); // assuming that copying never fails. Likely a bad idea.
+  window.location.hash = '';
+}
+
 let existingAnswers = [];
 // check if this is shared results url
 if (window.location.search && window.location.search.includes('?r=')) {
@@ -151,6 +160,11 @@ if (window.location.search && window.location.search.includes('?r=')) {
 document.querySelector('.start div button').addEventListener('click', () => {
   document.querySelector('.start').style.display = 'none';
   document.querySelector('#section-0').style.display = 'flex';
+});
+
+document.querySelector('#shareBtn').addEventListener('click', () => {
+  window.location.hash = 'share-modal';
+  document.querySelector('#share-modal').focus();
 });
 
 [...document.querySelectorAll('#sectionContainer button')].forEach(elm => {

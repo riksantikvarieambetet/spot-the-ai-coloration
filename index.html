@@ -9,7 +9,7 @@
   </head>
   <body>
     <nav class="raa-nav">
-    <img src="raa-logo.svg">
+    <img src="assets/raa-logo.svg">
     <ul>
       <li><a href="#">En</a></li>
       <li><a href="#" class="current">Sv</a></li>
@@ -37,8 +37,22 @@
       </div>
 
       <h2>Resultat och bildlicenser</h2>
+      <button id="shareBtn" class="raa-button raa-button-confirm">Dela resultatet</button>
+      <br>
       <div id="imagesResult"></div>
     </section>
+
+    <div class="raa-modal-overlay" id="share-modal">
+      <div class="raa-modal" style="max-width: 500px;">
+        <h3 style="margin: 1.5rem .5rem;">Shareable URL</h3>
+        <a href="#" class="close"title="Close modal">
+          <img src="assets/close_white_orange.png" aria-hidden="true">
+        </a>
+
+        <input type="url" readonly id="shareURLInput" class="m-tb-small m-lr-small raa-input" onfocus="this.select();">
+        <button class="m-tb-small m-lr-small raa-button raa-button-confirm" onclick="copySharableUrl()">Copy and close</button>
+      </div>
+    </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <script src="app.js"></script>
