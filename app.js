@@ -153,9 +153,15 @@ if (window.location.search && window.location.search.includes('?r=')) {
   existingAnswers = [...window.location.search.replace('?r=', '')];
   renderResults();
   document.querySelector('.start').style.display = 'none';
+  document.querySelector('#shareBtn').style.display = 'none';
+  document.querySelector('#retestBtn').style.display = 'block';
 } else {
   populateQuestions();
 }
+
+document.querySelector('#retestBtn').addEventListener('click', () => {
+  window.location.href = window.location.origin + window.location.pathname;
+});
 
 document.querySelector('.start div button').addEventListener('click', () => {
   document.querySelector('.start').style.display = 'none';
